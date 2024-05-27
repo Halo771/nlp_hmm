@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>新能源汽车智能故障分析系统</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <link rel="stylesheet" href="/static/css/answer.css" type='text/css'>
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>新能源汽车智能故障分析与可视化</h1>
+        <div class="show-time"></div>
+        <script>
+          var t = null;
+          t = setTimeout(time, 1000); //开始运行
+          function time() {
+            clearTimeout(t); //清除定时器
+            dt = new Date();
+            var y = dt.getFullYear();
+            var mt = dt.getMonth() + 1;
+            var day = dt.getDate();
+            var h = dt.getHours(); //获取时
+            var m = dt.getMinutes(); //获取分
+            var s = dt.getSeconds(); //获取秒
+            document.querySelector(".show-time").innerHTML =
+              "当前时间为：" +
+              y +
+              "年" +
+              mt +
+              "月" +
+              day +
+              "日-" +
+              h +
+              "时" +
+              m +
+              "分" +
+              s +
+              "秒";
+            t = setTimeout(time, 1000); //设定定时器，循环运行
+          }
+        </script>
+    </header>
+    <section class="mainbox">
+      <div class="column">
+        <!-- 这是主界面的内容 -->
+      <iframe src="/" width="100%" height="100%"></iframe>
+      </div>
+        <div class="column">
+            <div class="map">
+                <div class="map1"></div>
+                <div class="map2"></div>
+                <div class="map3"></div>
+                <div class="chart"></div>
+                <script type="text/javascript">
+                  var neo4j_data = {{ neo4j_data|safe }};
+                  var data = neo4j_data['data'];
+                  var links = neo4j_data['links'];
+                  console.log(data);
+                  console.log(links);
+                </script>
+        </div>
+    </section>
+      <script type="text/javascript" src="/static/js/echarts.js"></script>
+      <script type="text/javascript" src="/static/js/china.js"></script>
+      <script type="text/javascript" src="/static/js/jquery.js"></script>
+      <script type="text/javascript" src="/static/js/flexible.js"></script>
+      <script type="text/javascript" src="/static/js/answer.js"></script>
+</body>
+</html>
